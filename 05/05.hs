@@ -63,12 +63,14 @@ minReachableSeed2 parseResult = minSeed
     seedRange (a : b : xs) = (a, a + b) : seedRange xs
     seedRange [] = []
 
+    -- wir nehmen die Ränder aller Intervalle inkl. +/- 1
     seed_samples = sample_seeds . fst $ parseResult
     triples = snd parseResult
     triple_samples = sample_triples . concat $ triples
 
     seedsRanges = seedRange . fst $ parseResult
 
+    -- ungültige aus den Samples rausfiltern
     samples =
       filter
         ( \seed ->
